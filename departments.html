@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+<head>
+    <meta name="description" content="Apex Care Hospital in Dewas offers comprehensive healthcare, advanced surgeries, and 24/7 emergency support from top specialists."/>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Apex Care Hospital</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#FDFBF7",
+                        surface: "#FFFFFF",
+                        "surface-variant": "#EFECE5",
+                        "on-background": "#2C3531",
+                        "on-surface": "#2C3531",
+                        "on-surface-variant": "#5B6460",
+                        primary: "#0F5B4D",
+                        "primary-fixed": "#E0F2F1",
+                        "on-primary": "#FFFFFF",
+                        "on-primary-fixed": "#062E26",
+                        action: "#D26952", // Terracotta
+                        "action-hover": "#B85540",
+                        "outline-variant": "#DED9C9",
+                    },
+                    borderRadius: {
+                        '3xl': '1.5rem',
+                        '4xl': '2rem',
+                    },
+                    fontFamily: {
+                        display: ["Outfit", "sans-serif"],
+                        body: ["Manrope", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'soft-teal': '0 20px 40px -10px rgba(15, 91, 77, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline-md, .font-display-lg, .font-headline-lg { font-family: 'Outfit', sans-serif; }
+        
+        /* Transparent to Solid Nav Transition */
+        #top-nav {
+            background-color: transparent;
+            border-color: transparent;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #top-nav .nav-text { color: #FFFFFF; transition: color 0.3s; }
+        #top-nav .nav-link { color: rgba(255, 255, 255, 0.9); transition: color 0.3s; }
+        #top-nav .nav-link::after { background-color: #FFFFFF; }
+        #top-nav .logo-icon { background-color: rgba(255, 255, 255, 0.2); color: #FFFFFF; transition: all 0.3s; }
+        #top-nav .btn-outline { border-color: #FFFFFF; color: #FFFFFF; transition: all 0.3s; }
+        #top-nav .btn-solid { background-color: #FFFFFF; color: #0F5B4D; transition: all 0.3s; border-color: transparent; }
+
+        #top-nav.nav-solid {
+            background-color: rgba(253, 251, 247, 0.98);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(222, 217, 201, 0.3);
+            box-shadow: 0 4px 30px rgba(15, 91, 77, 0.05);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        #top-nav.nav-solid .nav-text { color: #0F5B4D; }
+        #top-nav.nav-solid .nav-link { color: #5B6460; }
+        #top-nav.nav-solid .nav-link:hover { color: #0F5B4D; }
+        #top-nav.nav-solid .nav-link::after { background-color: #0F5B4D; }
+        #top-nav.nav-solid .logo-icon { background-color: #E0F2F1; color: #0F5B4D; }
+        #top-nav.nav-solid .logo-group:hover .logo-icon { background-color: #0F5B4D; color: #FFFFFF; }
+        #top-nav.nav-solid .btn-outline { 
+            border-color: #0F5B4D; 
+            color: #0F5B4D; 
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        #top-nav.nav-solid .btn-outline::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background-color: #0F5B4D;
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease-out;
+            border-radius: 9999px;
+        }
+        #top-nav.nav-solid .btn-outline:hover {
+            color: #FFFFFF !important;
+        }
+        #top-nav.nav-solid .btn-outline:hover::before {
+            transform: scaleX(1);
+        }
+        #top-nav.nav-solid .btn-solid { background-color: #D26952; color: #FFFFFF; }
+
+        .blur-reveal {
+            opacity: 0;
+            filter: blur(10px);
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .blur-reveal.active {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+        }
+
+        /* Staggered hero text */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .stagger-item:nth-child(1) { animation-delay: 0.2s; }
+        .stagger-item:nth-child(2) { animation-delay: 0.4s; }
+        .stagger-item:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Ambient floating shapes */
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.4;
+            animation: float 15s ease-in-out infinite;
+        }
+        .blob-1 { background: #E0F2F1; width: 40vw; height: 40vw; top: -10%; left: -10%; animation-delay: 0s; }
+        .blob-2 { background: #FDECE7; width: 30vw; height: 30vw; bottom: 20%; right: -5%; animation-delay: 2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Hover effects */
+        .premium-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .premium-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px -10px rgba(15, 91, 77, 0.15);
+            border-color: rgba(15, 91, 77, 0.2);
+        }
+
+        .premium-card:hover .icon-container {
+            background-color: #0F5B4D;
+            color: #FFFFFF;
+            transform: scale(1.1);
+        }
+
+        .icon-container {
+            transition: all 0.4s ease;
+        }
+
+        /* Liquid Fill Button */
+        .btn-liquid {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+        .btn-liquid::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0F5B4D;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1;
+            border-radius: 50% 50% 0 0;
+        }
+        .btn-liquid:hover::before {
+            top: 0;
+            border-radius: 0;
+        }
+        .btn-liquid:hover {
+            color: #FFFFFF;
+        }
+
+        .btn-liquid.action::before { background: #B85540; }
+
+        /* Gallery Ken Burns */
+        .gallery-image-container { overflow: hidden; border-radius: 1.5rem; }
+        .gallery-image {
+            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-image-container:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        /* Background Carousel Ken Burns */
+        @keyframes kenBurns {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.15) translate(-1%, -1%); }
+        }
+        .carousel-item {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .carousel-item.active { opacity: 1; z-index: 1; }
+        .carousel-item.active img {
+            animation: kenBurns 20s ease-out infinite alternate;
+        }
+        
+        .arrow-icon {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .premium-card:hover .arrow-icon {
+            transform: translateX(6px);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    
+        /* 2. Custom App-Like Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #FDFBF7; }
+        ::-webkit-scrollbar-thumb { 
+            background: #0F5B4D; 
+            border-radius: 8px; 
+            border: 2px solid #FDFBF7;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #D26952; }
+        @media (max-width: 768px) { body { padding-bottom: 5rem; } }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col relative overflow-x-hidden">
+
+<!-- Ambient Background Shapes -->
+<div class="blob blob-1 rounded-full"></div>
+<div class="blob blob-2 rounded-full"></div>
+
+<!-- TopNavBar Component -->
+<header id="top-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-transparent text-white pt-4 pb-2 nav-solid">
+    <div class="w-full px-4 lg:px-6 xl:px-6">
+        <div class="flex justify-between items-center h-20 xl:h-24 gap-2 xl:gap-4">
+            <!-- Logo -->
+            <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer min-w-0">
+                <div class="nav-text text-lg xl:text-xl font-extrabold tracking-tight transition-colors truncate hover:text-[#D26952]">
+                    Apex Care Hospital & Research Centre
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden xl:flex items-center gap-5 xl:gap-8 2xl:gap-10">
+                <a href="index.html" class="nav-text text-[13px] xl:text-sm 2xl:text-base font-semibold hover:text-[#D26952] transition-colors relative group whitespace-nowrap">
+                    Home
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D26952] transition-all group-hover:w-full"></span>
+                </a>
+                <a href="about.html" class="nav-text text-[13px] xl:text-sm 2xl:text-base font-semibold hover:text-[#D26952] transition-colors relative group whitespace-nowrap">
+                    About Us
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D26952] transition-all group-hover:w-full"></span>
+                </a>
+                <a href="departments.html" class="nav-text text-[13px] xl:text-sm 2xl:text-base font-semibold hover:text-[#D26952] transition-colors relative group whitespace-nowrap">
+                    Departments
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D26952] transition-all group-hover:w-full"></span>
+                </a>
+                <a href="doctors.html" class="nav-text text-[13px] xl:text-sm 2xl:text-base font-semibold hover:text-[#D26952] transition-colors relative group whitespace-nowrap">
+                    Our Doctors
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D26952] transition-all group-hover:w-full"></span>
+                </a>
+                <a href="gallery.html" class="nav-text text-[13px] xl:text-sm 2xl:text-base font-semibold hover:text-[#D26952] transition-colors relative group whitespace-nowrap">
+                    Gallery
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D26952] transition-all group-hover:w-full"></span>
+                </a>
+                <a href="contact.html" class="nav-text text-[13px] xl:text-sm 2xl:text-base font-semibold hover:text-[#D26952] transition-colors relative group whitespace-nowrap">
+                    Contact Us
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D26952] transition-all group-hover:w-full"></span>
+                </a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="hidden lg:flex items-center gap-2 xl:gap-3 flex-shrink-0">
+                <a class="nav-text btn-outline text-sm xl:text-base font-bold border-2 border-white/60 hover:bg-white hover:text-[#0F5B4D] px-4 py-2 rounded-full transition-all whitespace-nowrap" href="appointment.html">Book Appointment</a>
+                <a class="btn-solid bg-[#D26952] text-white text-sm xl:text-base font-bold px-4 py-2 rounded-full btn-liquid action whitespace-nowrap flex items-center gap-2" href="#" onclick="openSOSModal(event)">
+                    <span class="material-symbols-outlined text-[20px] xl:text-[24px]">local_shipping</span>
+                    Emergency
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" aria-label="Menu" class="xl:hidden nav-text p-2 ml-4 logo-icon rounded-full flex-shrink-0">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Full Screen Mobile Menu Overlay -->
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[100] bg-[#053229]/95 backdrop-blur-2xl opacity-0 pointer-events-none transition-all duration-500 flex flex-col justify-center items-center">
+    <button id="mobile-menu-close" aria-label="Close Menu" class="absolute top-6 right-6 text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+        <span class="material-symbols-outlined text-3xl">close</span>
+    </button>
+    <nav class="flex flex-col items-center gap-6 w-full px-6">
+        <a href="index.html" class="text-white font-display text-3xl font-bold hover:text-[#D26952] transition-colors">Home</a>
+        <a href="about.html" class="text-white font-display text-3xl font-bold hover:text-[#D26952] transition-colors">About Us</a>
+        <a href="departments.html" class="text-white font-display text-3xl font-bold hover:text-[#D26952] transition-colors">Departments</a>
+        <a href="doctors.html" class="text-white font-display text-3xl font-bold hover:text-[#D26952] transition-colors">Our Doctors</a>
+        <a href="gallery.html" class="text-white font-display text-3xl font-bold hover:text-[#D26952] transition-colors">Gallery</a>
+        <a href="contact.html" class="text-white font-display text-3xl font-bold hover:text-[#D26952] transition-colors">Contact Us</a>
+        
+        <div class="h-px w-24 bg-white/20 my-2"></div>
+        
+        <a href="appointment.html" class="w-full max-w-xs text-center border-2 border-white text-white font-bold py-3 rounded-full hover:bg-white hover:text-[#0F5B4D] transition-colors">Book Appointment</a>
+        <a href="#" onclick="closeMobileMenu(); openSOSModal(event)" class="w-full max-w-xs text-center bg-[#D26952] text-white font-bold py-3 rounded-full flex justify-center items-center gap-2 shadow-[0_0_20px_rgba(210,105,82,0.4)]">
+            <span class="material-symbols-outlined">local_shipping</span> Emergency
+        </a>
+    </nav>
+</div>
+
+
+<main class="flex-grow z-10 relative bg-[#F5F5F7] pt-32 pb-24">
+    <div class="w-full max-w-[1200px] mx-auto px-6 md:px-12 xl:px-20">
+        <!-- Header -->
+        <div class="text-center mb-16 mt-12">
+            <span class="text-action font-bold uppercase tracking-widest text-sm mb-3 block">Expert Care</span>
+            <h1 class="font-display text-5xl md:text-6xl text-primary font-bold mb-6">Our Departments</h1>
+            <p class="text-lg text-on-surface-variant max-w-2xl mx-auto">Expert care tailored to your specific needs, delivered by renowned specialists across a wide range of medical fields.</p>
+        </div>
+
+
+        <div id="general-medicine" class="bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 p-8 md:p-12 lg:p-16 mb-12 flex flex-col md:flex-row gap-8 items-start scroll-mt-32">
+            <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+            </div>
+            <div>
+                <h2 class="font-display text-3xl text-primary font-bold mb-4">General Medicine</h2>
+                <p class="text-lg text-on-surface-variant leading-relaxed">Comprehensive care for adult illnesses, preventive medicine, and chronic disease management. Our general physicians are the first point of contact for patients seeking general medical care and non-surgical treatments.</p>
+            </div>
+        </div>
+
+        <div id="general-surgery" class="bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 p-8 md:p-12 lg:p-16 mb-12 flex flex-col md:flex-row gap-8 items-start scroll-mt-32">
+            <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">local_hospital</span>
+            </div>
+            <div>
+                <h2 class="font-display text-3xl text-primary font-bold mb-4">General Surgery</h2>
+                <p class="text-lg text-on-surface-variant leading-relaxed">Advanced surgical interventions ranging from routine appendectomies to complex abdominal procedures. Our team focuses heavily on minimally invasive techniques to ensure faster recovery times and minimal scarring.</p>
+            </div>
+        </div>
+
+        <div id="gynecology" class="bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 p-8 md:p-12 lg:p-16 mb-12 flex flex-col md:flex-row gap-8 items-start scroll-mt-32">
+            <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">pregnant_woman</span>
+            </div>
+            <div>
+                <h2 class="font-display text-3xl text-primary font-bold mb-4">Gynecology & Obstetrics</h2>
+                <p class="text-lg text-on-surface-variant leading-relaxed">Complete women's healthcare, from maternity and high-risk pregnancies to advanced gynecological treatments. We provide a safe, nurturing environment for childbirth and specialized care for all stages of a woman's life.</p>
+            </div>
+        </div>
+
+        <div id="orthopedics" class="bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 p-8 md:p-12 lg:p-16 mb-12 flex flex-col md:flex-row gap-8 items-start scroll-mt-32">
+            <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">accessible_forward</span>
+            </div>
+            <div>
+                <h2 class="font-display text-3xl text-primary font-bold mb-4">Orthopedics</h2>
+                <p class="text-lg text-on-surface-variant leading-relaxed">Specialized care for musculoskeletal conditions, joint replacements, trauma care, and sports injuries. Our orthopedic surgeons utilize the latest technology to restore mobility and improve quality of life.</p>
+            </div>
+        </div>
+
+        <div id="ent" class="bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 p-8 md:p-12 lg:p-16 mb-12 flex flex-col md:flex-row gap-8 items-start scroll-mt-32">
+            <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">hearing</span>
+            </div>
+            <div>
+                <h2 class="font-display text-3xl text-primary font-bold mb-4">ENT (Ear, Nose, Throat)</h2>
+                <p class="text-lg text-on-surface-variant leading-relaxed">Expert diagnosis and treatment for conditions affecting the ear, nose, throat, head, and neck. We offer comprehensive solutions for hearing loss, sinus issues, voice disorders, and pediatric ENT conditions.</p>
+            </div>
+        </div>
+
+        <div id="cardiology" class="bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 p-8 md:p-12 lg:p-16 mb-12 flex flex-col md:flex-row gap-8 items-start scroll-mt-32">
+            <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">ecg_heart</span>
+            </div>
+            <div>
+                <h2 class="font-display text-3xl text-primary font-bold mb-4">Cardiology</h2>
+                <p class="text-lg text-on-surface-variant leading-relaxed">State-of-the-art cardiovascular care, heart disease prevention, and advanced cardiac diagnostics. Our cardiology department is equipped to handle emergencies and provide ongoing management of chronic heart conditions.</p>
+            </div>
+        </div>
+
+        <div id="nephrology" class="bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 p-8 md:p-12 lg:p-16 mb-12 flex flex-col md:flex-row gap-8 items-start scroll-mt-32">
+            <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+            </div>
+            <div>
+                <h2 class="font-display text-3xl text-primary font-bold mb-4">Nephrology</h2>
+                <p class="text-lg text-on-surface-variant leading-relaxed">Comprehensive kidney care, including dialysis services and management of chronic kidney diseases. We provide holistic care plans to preserve kidney function and improve patient outcomes.</p>
+            </div>
+        </div>
+
+        <div id="urology" class="bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 p-8 md:p-12 lg:p-16 mb-12 flex flex-col md:flex-row gap-8 items-start scroll-mt-32">
+            <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">science</span>
+            </div>
+            <div>
+                <h2 class="font-display text-3xl text-primary font-bold mb-4">Urology</h2>
+                <p class="text-lg text-on-surface-variant leading-relaxed">Advanced treatments for urinary tract conditions and male reproductive health issues. Our urologists are skilled in both medical management and surgical interventions for conditions like kidney stones and prostate issues.</p>
+            </div>
+        </div>
+
+        <div id="dentistry" class="bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 p-8 md:p-12 lg:p-16 mb-12 flex flex-col md:flex-row gap-8 items-start scroll-mt-32">
+            <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">dentistry</span>
+            </div>
+            <div>
+                <h2 class="font-display text-3xl text-primary font-bold mb-4">Dentistry</h2>
+                <p class="text-lg text-on-surface-variant leading-relaxed">Full-spectrum dental care including preventive, restorative, and advanced implant surgeries. We ensure a painless and comfortable experience for all our dental patients.</p>
+            </div>
+        </div>
+
+        <div id="neurology" class="bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 p-8 md:p-12 lg:p-16 mb-12 flex flex-col md:flex-row gap-8 items-start scroll-mt-32">
+            <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+            </div>
+            <div>
+                <h2 class="font-display text-3xl text-primary font-bold mb-4">Neurology</h2>
+                <p class="text-lg text-on-surface-variant leading-relaxed">Specialized care for neurological disorders, stroke management, and advanced brain and nerve diagnostics. Our neurologists are trained to handle complex cases with precision and compassion.</p>
+            </div>
+        </div>
+
+        <div id="pediatrics" class="bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 p-8 md:p-12 lg:p-16 mb-12 flex flex-col md:flex-row gap-8 items-start scroll-mt-32">
+            <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">child_care</span>
+            </div>
+            <div>
+                <h2 class="font-display text-3xl text-primary font-bold mb-4">Pediatrics</h2>
+                <p class="text-lg text-on-surface-variant leading-relaxed">Compassionate, expert healthcare for infants, children, and adolescents. Our pediatric wing is designed to be child-friendly, ensuring that our youngest patients feel safe and comfortable during their treatment.</p>
+            </div>
+        </div>
+
+
+
+        <!-- Services Section -->
+        <div class="bg-[#0F5B4D] text-white rounded-[3rem] shadow-xl p-12 text-center relative overflow-hidden mb-12">
+            <div class="absolute inset-0 bg-white/5 skew-y-3 origin-top-left z-0"></div>
+            <h2 class="font-display text-3xl font-bold mb-4 relative z-10">Additional Services Offered</h2>
+            <div class="flex items-center justify-center gap-4 relative z-10 mt-8">
+                <div class="bg-white/10 px-8 py-4 rounded-2xl border border-white/20 flex items-center gap-3">
+                    <span class="material-symbols-outlined text-3xl">radiology</span>
+                    <span class="text-xl font-bold">X-Ray Diagnostics</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</main>
+
+<!-- Footer Component -->
+<footer class="bg-[#0A3D33] text-white/80 w-full pt-24 pb-12 rounded-t-[3rem] mt-12 relative z-10">
+    <div class="w-full max-w-7xl mx-auto px-6 md:px-12 xl:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        
+        <!-- Brand Info -->
+        <div class="col-span-1 md:col-span-2 lg:col-span-1 flex flex-col gap-6">
+            <a class="font-display text-2xl font-bold text-white flex items-center gap-3" href="#">
+                <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                </div>
+                Apex Care
+            </a>
+            <p class="text-sm leading-relaxed text-white/80">
+                Informed Compassion in Healthcare. We blend modern medical science with profound human empathy to deliver premium care to the Dewas community.
+            </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+            <h4 class="font-display font-bold text-white text-lg mb-6">Quick Links</h4>
+            <ul class="flex flex-col gap-4">
+                <li><a href="about.html" class="hover:text-white hover:translate-x-1 inline-block transition-transform duration-200">About Us</a></li>
+                <li><a href="departments.html" class="hover:text-white hover:translate-x-1 inline-block transition-transform duration-200">Departments</a></li>
+                <li><a href="doctors.html" class="hover:text-white hover:translate-x-1 inline-block transition-transform duration-200">Our Doctors</a></li>
+                <li><a href="appointment.html" class="hover:text-white hover:translate-x-1 inline-block transition-transform duration-200">Book Appointment</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="col-span-1 md:col-span-2 lg:col-span-2">
+            <h4 class="font-display font-bold text-white text-lg mb-6">Contact Us</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-action mt-1">location_on</span>
+                    <span class="text-sm leading-relaxed">Apex Care Hospital And Research Centre<br/>Gomti Nagar, Dewas</span>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-action">call</span>
+                        <span class="text-sm">07272401588 (Hospital & Emergency)</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-action">mail</span>
+                        <span class="text-sm">contact@apexcarehospital.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="w-full max-w-7xl mx-auto px-6 md:px-12 xl:px-20 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+        <p>© 2024 Apex Care Hospital. All rights reserved.</p>
+        <div class="flex gap-6">
+            <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+
+        // Intersection Observer for Scroll Animations (Blur Reveal)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Stop observing once revealed
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.blur-reveal').forEach(section => {
+            observer.observe(section);
+        });
+
+        });
+</script>
+
+
+<!-- SOS Fullscreen Modal -->
+<div id="sos-modal" class="fixed inset-0 z-[9999] bg-[#9B2226]/95 backdrop-blur-xl hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300 p-4 overflow-hidden">
+    
+    <button onclick="closeSOSModal()" class="absolute top-4 right-4 lg:top-6 lg:right-6 text-white bg-white/20 hover:bg-white/40 p-3 rounded-full transition-colors z-[10000]">
+        <span class="material-symbols-outlined text-3xl">close</span>
+    </button>
+    
+    <div class="max-w-xl w-full flex flex-col items-center text-center mt-2 mb-2">
+        <div class="w-16 h-16 bg-white text-[#9B2226] rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.4)] animate-pulse mb-4">
+            <span class="material-symbols-outlined text-[40px]">emergency</span>
+        </div>
+        
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">EMERGENCY SOS</h2>
+        <p class="text-base md:text-lg text-white/90 mb-6 font-medium">Select immediate action below. Do not panic, help is available 24/7.</p>
+        
+        <div class="flex flex-col gap-4 w-full">
+            <!-- Call Hospital -->
+            <a href="tel:07272401588" class="w-full bg-white hover:bg-gray-100 font-black py-4 px-6 rounded-2xl transition-transform transform hover:scale-[1.02] active:scale-95 flex items-center justify-between shadow-xl">
+                <div class="flex flex-col items-start text-left">
+                    <span class="text-3xl md:text-4xl mb-0.5 text-[#9B2226]">07272401588</span>
+                    <span class="text-sm opacity-80 font-bold text-gray-700">Call Hospital Emergency</span>
+                </div>
+                <span class="material-symbols-outlined text-[36px] md:text-[48px] text-[#9B2226]">call</span>
+            </a>
+            
+            <!-- Navigate -->
+            <a href="https://maps.google.com/?q=Apex+Care+Hospital,+Dewas" target="_blank" class="w-full bg-[#1A1A1A] text-white hover:bg-black font-black py-4 px-6 rounded-2xl transition-transform transform hover:scale-[1.02] active:scale-95 flex items-center justify-between shadow-xl border-2 border-white/20">
+                <div class="flex flex-col items-start text-left">
+                    <span class="text-xl md:text-2xl mb-0.5">Navigate to Hospital</span>
+                    <span class="text-xs opacity-80 font-bold">Open Google Maps</span>
+                </div>
+                <span class="material-symbols-outlined text-[32px] md:text-[40px]">directions_car</span>
+            </a>
+            
+            <!-- Share Location -->
+            <button onclick="shareLocation()" class="w-full bg-blue-600 text-white hover:bg-blue-700 font-black py-4 px-6 rounded-2xl transition-transform transform hover:scale-[1.02] active:scale-95 flex items-center justify-between shadow-xl">
+                <div class="flex flex-col items-start text-left">
+                    <span class="text-xl md:text-2xl mb-0.5">Share My Location</span>
+                    <span class="text-xs opacity-80 font-bold" id="location-status">Send GPS coordinates via WhatsApp</span>
+                </div>
+                <span class="material-symbols-outlined text-[32px] md:text-[40px]" id="location-icon">share_location</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const sosModal = document.getElementById('sos-modal');
+
+    function openSOSModal(e) {
+        if(e) e.preventDefault();
+        sosModal.classList.remove('hidden');
+        sosModal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        
+        setTimeout(() => {
+            sosModal.classList.remove('opacity-0');
+            sosModal.classList.add('opacity-100');
+        }, 10);
+    }
+
+    function closeSOSModal() {
+        sosModal.classList.remove('opacity-100');
+        sosModal.classList.add('opacity-0');
+        document.body.style.overflow = '';
+        
+        setTimeout(() => {
+            sosModal.classList.add('hidden');
+            sosModal.classList.remove('flex');
+        }, 300);
+    }
+
+    function shareLocation() {
+        const status = document.getElementById('location-status');
+        const icon = document.getElementById('location-icon');
+        
+        if (!navigator.geolocation) {
+            status.textContent = 'Geolocation is not supported by your browser';
+            return;
+        }
+
+        status.textContent = 'Locating...';
+        icon.textContent = 'hourglass_empty';
+        
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                const mapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+                const message = `EMERGENCY: I need help. My current location is: ${mapsUrl}`;
+                
+                status.textContent = 'Location Found! Opening WhatsApp...';
+                icon.textContent = 'check_circle';
+                
+                setTimeout(() => {
+                    window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+                    status.textContent = 'Send GPS coordinates via WhatsApp';
+                    icon.textContent = 'share_location';
+                }, 1000);
+            },
+            (error) => {
+                status.textContent = 'Unable to retrieve location (Permission Denied).';
+                icon.textContent = 'error';
+            }
+        );
+    }
+</script>
+
+<script src="https://js.puter.com/v2/"></script>
+
+
+<!-- Mobile Menu Logic -->
+<script>
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileClose = document.getElementById('mobile-menu-close');
+    const mobileOverlay = document.getElementById('mobile-menu-overlay');
+
+    function openMobileMenu() {
+        if(mobileOverlay) {
+            mobileOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            mobileOverlay.classList.add('opacity-100', 'pointer-events-auto');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeMobileMenu() {
+        if(mobileOverlay) {
+            mobileOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+            mobileOverlay.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (mobileBtn) mobileBtn.addEventListener('click', openMobileMenu);
+    if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
+</script>
+
+<!-- Mobile Bottom Taskbar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-[#FDFBF7]/95 backdrop-blur-xl border-t border-gray-200 z-[90] pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+    <div class="flex justify-around items-center h-16 px-2">
+        <a href="index.html" class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-[24px]">home</span>
+            <span class="text-[10px] font-bold mt-1">Home</span>
+        </a>
+        <a href="doctors.html" class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-[24px]">stethoscope</span>
+            <span class="text-[10px] font-bold mt-1">Doctors</span>
+        </a>
+        <a href="appointment.html" class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-[24px]">calendar_month</span>
+            <span class="text-[10px] font-bold mt-1">Book</span>
+        </a>
+        <a href="#" onclick="openSOSModal(event)" class="flex flex-col items-center justify-center w-full h-full text-action hover:text-[#B85540] transition-colors relative">
+            <div class="absolute -top-5 bg-action text-white p-2.5 rounded-full shadow-[0_4px_15px_rgba(210,105,82,0.4)] border-4 border-[#FDFBF7]">
+                <span class="material-symbols-outlined text-[24px]">local_shipping</span>
+            </div>
+            <span class="text-[10px] font-bold mt-7">SOS</span>
+        </a>
+    </div>
+</nav>
+
+</body>
+
+
+
+
+
+</html>
