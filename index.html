@@ -256,30 +256,6 @@
         }
         ::-webkit-scrollbar-thumb:hover { background: #D26952; }
         @media (max-width: 768px) { body { padding-bottom: 5rem; } }
-    
-        /* Hero Image Slideshow */
-        .slideshow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            background-size: cover;
-            background-position: center;
-            animation: crossfade 24s infinite;
-        }
-        .slide-1 { animation-delay: 0s; }
-        .slide-2 { animation-delay: 6s; }
-        .slide-3 { animation-delay: 12s; }
-        .slide-4 { animation-delay: 18s; }
-
-        @keyframes crossfade {
-            0% { opacity: 0; transform: scale(1.05); }
             5% { opacity: 1; transform: scale(1.02); }
             25% { opacity: 1; transform: scale(1.0); }
             30% { opacity: 0; transform: scale(1.05); }
@@ -378,11 +354,19 @@
     <section class="relative w-full min-h-[70vh] md:min-h-[105vh] overflow-hidden shadow-2xl flex flex-col justify-end bg-[#0F5B4D] -mt-1">
                 <!-- Background Slideshow -->
         <div class="absolute inset-0 z-0 bg-[#0F5B4D]">
-            <div class="slideshow">
-                <div class="slide slide-1" style="background-image: url('slide1.jpg');"></div>
-                <div class="slide slide-2" style="background-image: url('slide2.jpg');"></div>
-                <div class="slide slide-3" style="background-image: url('slide3.jpg');"></div>
-                <div class="slide slide-4" style="background-image: url('slide4.png');"></div>
+            <div class="slideshow" id="hero-slider">
+                <div class="slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-100 scale-100 z-10" style="background-image: url('slide1.jpg');"></div>
+                <div class="slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0" style="background-image: url('slide2.jpg');"></div>
+                <div class="slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0" style="background-image: url('slide3.jpg');"></div>
+                <div class="slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0" style="background-image: url('slide4.png');"></div>
+                
+                <!-- Controls -->
+                <button onclick="window.prevHeroSlide()" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-30 bg-black/20 hover:bg-black/50 text-white p-2 md:p-3 rounded-full backdrop-blur-md transition-colors shadow-lg cursor-pointer pointer-events-auto">
+                    <span class="material-symbols-outlined text-2xl md:text-3xl">chevron_left</span>
+                </button>
+                <button onclick="window.nextHeroSlide()" class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-30 bg-black/20 hover:bg-black/50 text-white p-2 md:p-3 rounded-full backdrop-blur-md transition-colors shadow-lg cursor-pointer pointer-events-auto">
+                    <span class="material-symbols-outlined text-2xl md:text-3xl">chevron_right</span>
+                </button>
             </div>
             <!-- Overlay to darken the images slightly for text legibility -->
             <div class="absolute inset-0 bg-[#0F5B4D]/30 z-10 pointer-events-none mix-blend-multiply"></div>
@@ -478,30 +462,6 @@
                     transform: scaleX(1);
                 }
                 @media (max-width: 768px) { body { padding-bottom: 5rem; } }
-    
-        /* Hero Image Slideshow */
-        .slideshow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            background-size: cover;
-            background-position: center;
-            animation: crossfade 24s infinite;
-        }
-        .slide-1 { animation-delay: 0s; }
-        .slide-2 { animation-delay: 6s; }
-        .slide-3 { animation-delay: 12s; }
-        .slide-4 { animation-delay: 18s; }
-
-        @keyframes crossfade {
-            0% { opacity: 0; transform: scale(1.05); }
             5% { opacity: 1; transform: scale(1.02); }
             25% { opacity: 1; transform: scale(1.0); }
             30% { opacity: 0; transform: scale(1.05); }
@@ -849,30 +809,6 @@
                     .card-4 { transform: rotateY(270deg) translateZ(150px); }
                 }
                 @media (max-width: 768px) { body { padding-bottom: 5rem; } }
-    
-        /* Hero Image Slideshow */
-        .slideshow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            background-size: cover;
-            background-position: center;
-            animation: crossfade 24s infinite;
-        }
-        .slide-1 { animation-delay: 0s; }
-        .slide-2 { animation-delay: 6s; }
-        .slide-3 { animation-delay: 12s; }
-        .slide-4 { animation-delay: 18s; }
-
-        @keyframes crossfade {
-            0% { opacity: 0; transform: scale(1.05); }
             5% { opacity: 1; transform: scale(1.02); }
             25% { opacity: 1; transform: scale(1.0); }
             30% { opacity: 0; transform: scale(1.05); }
@@ -1540,6 +1476,52 @@
         </a>
     </div>
 </nav>
+
+
+<script>
+// Hero Slider Logic
+let currentHeroSlide = 0;
+const heroSlides = document.querySelectorAll('#hero-slider .slide');
+const totalHeroSlides = heroSlides.length;
+let heroSlideInterval;
+
+function showHeroSlide(index) {
+    if(heroSlides.length === 0) return;
+    heroSlides.forEach((slide, i) => {
+        slide.style.opacity = i === index ? '1' : '0';
+        slide.style.transform = i === index ? 'scale(1)' : 'scale(1.05)';
+        slide.style.zIndex = i === index ? '10' : '0';
+    });
+}
+
+window.nextHeroSlide = function() {
+    currentHeroSlide = (currentHeroSlide + 1) % totalHeroSlides;
+    showHeroSlide(currentHeroSlide);
+    resetHeroInterval();
+};
+
+window.prevHeroSlide = function() {
+    currentHeroSlide = (currentHeroSlide - 1 + totalHeroSlides) % totalHeroSlides;
+    showHeroSlide(currentHeroSlide);
+    resetHeroInterval();
+};
+
+function startHeroSlideshow() {
+    if(totalHeroSlides > 0) {
+        heroSlideInterval = setInterval(() => {
+            currentHeroSlide = (currentHeroSlide + 1) % totalHeroSlides;
+            showHeroSlide(currentHeroSlide);
+        }, 3500); // 3.5 seconds (Faster)
+    }
+}
+
+function resetHeroInterval() {
+    clearInterval(heroSlideInterval);
+    startHeroSlideshow();
+}
+
+startHeroSlideshow();
+</script>
 
 </body>
 
