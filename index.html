@@ -353,10 +353,23 @@
     <!-- Hero Section -->
     <section class="relative w-full min-h-[70vh] md:min-h-[105vh] overflow-hidden shadow-2xl flex flex-col justify-end bg-[#0F5B4D] -mt-1">
                 <!-- Background Slideshow -->
-        <div class="absolute inset-0 z-0">
-            <video aria-hidden="true" muted autoplay loop playsinline class="w-full h-full object-cover">
-                <source src="Hero-Video.mp4" type="video/mp4">
-            </video>
+        <div class="absolute inset-0 z-0 bg-[#0F5B4D]">
+            <div class="slideshow" id="hero-slider">
+                <div class="slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-100 scale-100 z-10" style="background-image: url('slide1.jpg');"></div>
+                <div class="slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0" style="background-image: url('slide2.jpg');"></div>
+                <div class="slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0" style="background-image: url('slide3.jpg');"></div>
+                <div class="slide absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0" style="background-image: url('slide4.png');"></div>
+                
+                <!-- Controls -->
+                <button onclick="window.prevHeroSlide()" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-30 bg-black/20 hover:bg-black/50 text-white p-2 md:p-3 rounded-full backdrop-blur-md transition-colors shadow-lg cursor-pointer pointer-events-auto">
+                    <span class="material-symbols-outlined text-2xl md:text-3xl">chevron_left</span>
+                </button>
+                <button onclick="window.nextHeroSlide()" class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-30 bg-black/20 hover:bg-black/50 text-white p-2 md:p-3 rounded-full backdrop-blur-md transition-colors shadow-lg cursor-pointer pointer-events-auto">
+                    <span class="material-symbols-outlined text-2xl md:text-3xl">chevron_right</span>
+                </button>
+            </div>
+            <!-- Overlay to darken the images slightly for text legibility -->
+            <div class="absolute inset-0 bg-[#0F5B4D]/30 z-10 pointer-events-none mix-blend-multiply"></div>
             <!-- Bottom Gradient for Text Legibility -->
             <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0F5B4D]/90 via-[#0F5B4D]/40 to-transparent z-10 pointer-events-none"></div>
         </div>
@@ -1465,7 +1478,50 @@
 </nav>
 
 
+<script>
+// Hero Slider Logic
+let currentHeroSlide = 0;
+const heroSlides = document.querySelectorAll('#hero-slider .slide');
+const totalHeroSlides = heroSlides.length;
+let heroSlideInterval;
 
+function showHeroSlide(index) {
+    if(heroSlides.length === 0) return;
+    heroSlides.forEach((slide, i) => {
+        slide.style.opacity = i === index ? '1' : '0';
+        slide.style.transform = i === index ? 'scale(1)' : 'scale(1.05)';
+        slide.style.zIndex = i === index ? '10' : '0';
+    });
+}
+
+window.nextHeroSlide = function() {
+    currentHeroSlide = (currentHeroSlide + 1) % totalHeroSlides;
+    showHeroSlide(currentHeroSlide);
+    resetHeroInterval();
+};
+
+window.prevHeroSlide = function() {
+    currentHeroSlide = (currentHeroSlide - 1 + totalHeroSlides) % totalHeroSlides;
+    showHeroSlide(currentHeroSlide);
+    resetHeroInterval();
+};
+
+function startHeroSlideshow() {
+    if(totalHeroSlides > 0) {
+        heroSlideInterval = setInterval(() => {
+            currentHeroSlide = (currentHeroSlide + 1) % totalHeroSlides;
+            showHeroSlide(currentHeroSlide);
+        }, 3500); // 3.5 seconds (Faster)
+    }
+}
+
+function resetHeroInterval() {
+    clearInterval(heroSlideInterval);
+    startHeroSlideshow();
+}
+
+startHeroSlideshow();
+</script>
 
 </body>
 
