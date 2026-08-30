@@ -356,10 +356,10 @@
                 <!-- Background Slideshow -->
         <div class="absolute inset-0 z-0 bg-[#0F5B4D]">
             <div class="slideshow" id="hero-slider">
-                <div class="slide absolute inset-0 bg-cover bg-[center_40%] transition-all duration-1000 ease-in-out opacity-100 scale-100 z-10 bg-[url('slide1-mobile.png')] md:bg-[url('slide1-desktop.png')]"></div>
-                <div class="slide absolute inset-0 bg-cover bg-[center_40%] transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0 bg-[url('slide2-mobile.png')] md:bg-[url('slide2-desktop.png')]"></div>
-                <div class="slide absolute inset-0 bg-cover bg-[center_40%] transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0 bg-[url('slide4-mobile.png')] md:bg-[url('slide4-desktop.png')]"></div>
-                <div class="slide absolute inset-0 bg-cover bg-[center_40%] transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0 bg-[url('slide5-mobile.png')] md:bg-[url('slide5-desktop.png')]"></div>
+                <div class="slide absolute inset-0 bg-cover bg-[center_40%] md:bg-[center_10%] transition-all duration-1000 ease-in-out opacity-100 scale-100 z-10 bg-[url('slide1-mobile.png')] md:bg-[url('slide1-desktop.png')]"></div>
+                <div class="slide absolute inset-0 bg-cover bg-[center_40%] md:bg-[center_70%] transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0 bg-[url('slide2-mobile.png')] md:bg-[url('slide2-desktop.png')]"></div>
+                <div class="slide absolute inset-0 bg-cover bg-[center_40%] md:bg-center transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0 bg-[url('slide4-mobile.png')] md:bg-[url('slide4-desktop.png')]"></div>
+                <div class="slide absolute inset-0 bg-cover bg-[center_40%] md:bg-center transition-all duration-1000 ease-in-out opacity-0 scale-105 z-0 bg-[url('slide5-mobile.png')] md:bg-[url('slide5-desktop.png')]"></div>
                 
                 <!-- Controls -->
                 <button onclick="window.prevHeroSlide()" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-30 bg-black/20 hover:bg-black/50 text-white p-2 md:p-3 rounded-full backdrop-blur-md transition-colors shadow-lg cursor-pointer pointer-events-auto">
@@ -377,14 +377,14 @@
             <div class="max-w-[1200px] mx-auto w-full">
             
             <!-- Search / Sitemap Mega Menu -->
-            <div class="hidden h-auto min-h-[300px] rounded-3xl bg-[#053229]/95 shadow-[0_30px_60px_rgba(0,0,0,0.5)] border-white/10 opacity-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div class="hidden h-[350px] md:h-[240px] rounded-3xl bg-[#053229]/95 shadow-[0_30px_60px_rgba(0,0,0,0.5)] border-white/10 opacity-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             
-            <div class="w-full max-w-3xl mx-auto mb-10 relative z-[60] h-[64px]" id="morph-wrapper">
+            <div class="w-full max-w-3xl mx-auto mb-10 relative z-[60] h-[52px]" id="morph-wrapper">
                 <!-- The Expanding Container -->
-                <div id="morph-container" class="absolute top-0 left-0 right-0 bg-[#053229]/50 backdrop-blur-xl border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden h-[64px]">
+                <div id="morph-container" class="absolute bottom-0 left-0 right-0 bg-[#053229]/50 backdrop-blur-xl border border-white/20 rounded-[26px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden h-[52px]">
                     
                     <!-- The Input Area (Fixed at top) -->
-                    <div class="absolute top-0 left-0 right-0 h-[64px] flex items-center p-2 pl-6 border-b border-transparent transition-colors duration-500 z-10" id="morph-input-area">
+                    <div class="absolute top-0 left-0 right-0 h-[52px] flex items-center p-2 pl-6 border-b border-transparent transition-colors duration-500 z-10" id="morph-input-area">
                         <span class="material-symbols-outlined text-white/80 absolute left-6">search</span>
                         <input type="text" id="morph-input" autocomplete="off" placeholder="Search quick links or explore Sitemap..." aria-label="Search quick links or explore Sitemap..." class="bg-transparent text-white placeholder-white/70 outline-none border-none ring-0 focus:ring-0 w-full text-sm lg:text-base font-medium pl-10 pr-12" onfocus="openMorph()">
                         <button onclick="closeMorph()" id="morph-close-btn" class="absolute right-6 text-white/80 hover:text-white transition-colors cursor-pointer pointer-events-none opacity-0 transition-opacity duration-300 flex items-center justify-center">
@@ -393,7 +393,7 @@
                     </div>
 
                     <!-- Sitemap Content Area (Revealed on open, below input) -->
-                    <div id="morph-content" class="absolute top-[64px] bottom-0 left-0 right-0 opacity-0 -translate-y-4 transition-all duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] pointer-events-none flex flex-col">
+                    <div id="morph-content" class="absolute top-[52px] bottom-0 left-0 right-0 opacity-0 -translate-y-4 transition-all duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] pointer-events-none flex flex-col">
                         
                         <!-- Sitemap Grid -->
                         <div class="flex-grow px-4 md:px-8 py-6 overflow-y-auto custom-scrollbar">
@@ -481,7 +481,7 @@
     </section>
 
     <!-- Welcome Section (Reimagined Layout) -->
-    <section class="py-24 relative bg-[#F5F5F7]">
+    <section class="pt-20 pb-12 relative bg-[#F5F5F7]">
         <div class="w-full max-w-7xl mx-auto px-4 md:px-8 xl:px-12 blur-reveal">
             
             <!-- Centered Title -->
@@ -510,7 +510,7 @@
                         <li>Our Advanced Infrastructure features 3 Modern Operation Theaters, including Modular OT with Laminar Flow.</li>
                         <li>We offer the best ICU, NICU & PICU facilities in the region.</li>
                         <li>We provide 24/7 Emergency Support with a dedicated Trauma Center for Head Injuries.</li>
-                        <li>We house Comprehensive Diagnostics (Pathology, X-Ray, Endoscopy, TMT, ECG, EEG).</li>
+                        <li>We house Comprehensive Diagnostics (Pathology, X-Ray, TMT, ECG, EEG).</li>
                     </ul>
 
                     <div class="mb-8 lg:mb-0">
@@ -535,7 +535,7 @@
     </section>
 
     <!-- Services Section -->
-    <section class="py-24 relative my-12 mx-4 md:mx-8 xl:mx-16 bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 overflow-hidden">
+    <section class="pt-16 pb-12 relative mb-6 mt-0 mx-4 md:mx-8 xl:mx-16 bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 overflow-hidden">
         
         <div class="w-full max-w-7xl mx-auto px-6 md:px-12 xl:px-20">
             <div class="text-center max-w-3xl mx-auto mb-20 blur-reveal">
@@ -613,7 +613,7 @@
     </section>
 
     <!-- Why Choose Us Section -->
-    <section class="py-24 relative my-12 mx-4 md:mx-8 xl:mx-16 bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 overflow-hidden">
+    <section class="pt-12 pb-24 relative my-6 mx-4 md:mx-8 xl:mx-16 bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 overflow-hidden">
         <div class="w-full max-w-7xl mx-auto px-6 md:px-12 xl:px-20 blur-reveal">
             <div class="text-center max-w-3xl mx-auto mb-20">
                 <span class="text-action font-bold uppercase tracking-widest text-sm mb-3 block">Features</span>
@@ -673,7 +673,7 @@
                         <span class="material-symbols-outlined text-4xl text-primary">science</span>
                     </div>
                     <h3 class="font-display text-xl font-bold text-on-surface mb-3">Advanced Diagnostics</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed">In-house Pathology lab, X-Ray, Endoscopy, TMT, ECG, and EEG.</p>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">In-house Pathology lab, X-Ray, TMT, ECG, and EEG.</p>
                 </div>
             </div>
         </div>
@@ -741,15 +741,10 @@
     <!-- Gallery Section -->
     <section class="py-24 relative my-12 mx-4 md:mx-8 xl:mx-16 bg-white rounded-[3rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-black/5 overflow-hidden reveal">
         <div class="w-full max-w-7xl mx-auto px-6 md:px-12 xl:px-20">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-                <div class="max-w-2xl">
-                    <span class="text-action font-bold uppercase tracking-widest text-sm mb-3 block">Our Space</span>
-                    <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-4">Tour the Facility</h2>
-                    <p class="text-lg text-on-surface-variant">Experience our state-of-the-art infrastructure designed for comfort and healing.</p>
-                </div>
-                <a href="gallery.html" class="text-primary font-bold flex items-center gap-2 hover:text-action transition-colors">
-                    View Full Gallery <span class="material-symbols-outlined">arrow_forward</span>
-                </a>
+            <div class="text-center max-w-3xl mx-auto mb-16 blur-reveal">
+                <span class="text-action font-bold uppercase tracking-widest text-sm mb-3 block">Our Space</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-6">Tour the Facility</h2>
+                <p class="text-lg text-on-surface-variant">Experience our state-of-the-art infrastructure designed for comfort and healing.</p>
             </div>
 
             <!-- 3D Carousel Implementation -->
@@ -846,6 +841,13 @@
                     spinner.style.transform = `rotateY(${angle}deg)`;
                 });
             </script>
+            
+            <div class="mt-12 text-center blur-reveal">
+                <a href="gallery.html" class="inline-flex items-center gap-2 text-action font-bold hover:text-primary transition-colors text-lg group">
+                    View Full Gallery 
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -1324,54 +1326,6 @@
 
 <!-- Morph AI Logic -->
 <script>
-    const morphContainer = document.getElementById('morph-container');
-    const morphContent = document.getElementById('morph-content');
-    const morphInputArea = document.getElementById('morph-input-area');
-    const morphInput = document.getElementById('morph-input');
-    let isMorphOpen = false;
-
-    function openMorph() {
-        if (isMorphOpen) return;
-        isMorphOpen = true;
-
-        // Smooth Container Expansion with Glowing Shadow
-        morphContainer.classList.add('shadow-[0_20px_50px_rgba(0,255,180,0.15)]');
-        morphContainer.classList.remove('shadow-[0_8px_32px_rgba(0,0,0,0.4)]', 'h-[64px]', 'rounded-full', 'bg-[#053229]/50');
-        morphContainer.classList.add('h-auto', 'min-h-[300px]', 'max-h-[60vh]', 'rounded-3xl', 'bg-[#053229]/95');
-        
-        // Smooth Content Reveal
-        morphContent.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
-        morphContent.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-        morphInputArea.classList.replace('border-transparent', 'border-white/10');
-        
-        // Show close button
-        document.getElementById('morph-close-btn').classList.remove('opacity-0', 'pointer-events-none');
-        document.getElementById('morph-close-btn').classList.add('opacity-100', 'pointer-events-auto');
-    }
-
-    function closeMorph() {
-        if (!isMorphOpen) return;
-        isMorphOpen = false;
-
-        // Smooth Content Hide
-        morphContent.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-        morphContent.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
-        
-        // Smooth Container Collapse and remove glow
-        morphContainer.classList.remove('shadow-[0_20px_50px_rgba(0,255,180,0.15)]', 'h-auto', 'min-h-[300px]', 'max-h-[60vh]', 'rounded-3xl', 'bg-[#053229]/95');
-        morphContainer.classList.add('shadow-[0_8px_32px_rgba(0,0,0,0.4)]', 'h-[64px]', 'rounded-full', 'bg-[#053229]/50');
-        morphInputArea.classList.replace('border-white/10', 'border-transparent');
-        
-        // Hide close button
-        document.getElementById('morph-close-btn').classList.remove('opacity-100', 'pointer-events-auto');
-        document.getElementById('morph-close-btn').classList.add('opacity-0', 'pointer-events-none');
-        
-        // Reset search state after transition
-        setTimeout(() => {            sosModal.classList.remove('opacity-0');
-            sosModal.classList.add('opacity-100');
-        }, 10);
-    }
-
     function closeSOSModal() {
         sosModal.classList.remove('opacity-100');
         sosModal.classList.add('opacity-0');
@@ -1501,8 +1455,8 @@
 
         // Smooth Container Expansion with Glowing Shadow
         morphContainer.classList.add('shadow-[0_20px_50px_rgba(0,255,180,0.15)]');
-        morphContainer.classList.remove('shadow-[0_8px_32px_rgba(0,0,0,0.4)]', 'h-[64px]', 'rounded-full', 'bg-[#053229]/50');
-        morphContainer.classList.add('h-auto', 'min-h-[300px]', 'rounded-3xl', 'bg-[#053229]/90');
+        morphContainer.classList.remove('shadow-[0_8px_32px_rgba(0,0,0,0.4)]', 'h-[52px]', 'bg-[#053229]/50');
+        morphContainer.classList.add('h-[350px]', 'md:h-[240px]', 'bg-[#053229]/90');
         
         // Smooth Content Reveal
         morphContent.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
@@ -1519,8 +1473,8 @@
         morphContent.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
         
         // Smooth Container Collapse and remove glow
-        morphContainer.classList.remove('shadow-[0_20px_50px_rgba(0,255,180,0.15)]', 'h-auto', 'min-h-[300px]', 'rounded-3xl', 'bg-[#053229]/90');
-        morphContainer.classList.add('shadow-[0_8px_32px_rgba(0,0,0,0.4)]', 'h-[64px]', 'rounded-full', 'bg-[#053229]/50');
+        morphContainer.classList.remove('shadow-[0_20px_50px_rgba(0,255,180,0.15)]', 'h-[350px]', 'md:h-[240px]', 'bg-[#053229]/90');
+        morphContainer.classList.add('shadow-[0_8px_32px_rgba(0,0,0,0.4)]', 'h-[52px]', 'bg-[#053229]/50');
         morphInputArea.classList.replace('border-white/10', 'border-transparent');
         
         // Reset search state after transition
