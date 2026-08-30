@@ -247,6 +247,11 @@
         }
 
         /* 2. Custom App-Like Scrollbar */
+        /* Custom scrollbar for sitemap */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #FDFBF7; }
         ::-webkit-scrollbar-thumb { 
@@ -373,47 +378,46 @@
             
             <!-- Search / Sitemap Mega Menu -->
             <div class="hidden h-auto min-h-[300px] rounded-3xl bg-[#053229]/95 shadow-[0_30px_60px_rgba(0,0,0,0.5)] border-white/10 opacity-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            
             <div class="w-full max-w-3xl mx-auto mb-10 relative z-[60] h-[64px]" id="morph-wrapper">
                 <!-- The Expanding Container -->
-                <div id="morph-container" class="absolute bottom-0 left-0 right-0 bg-[#053229]/50 backdrop-blur-xl border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden h-[64px]">
+                <div id="morph-container" class="absolute top-0 left-0 right-0 bg-[#053229]/50 backdrop-blur-xl border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden h-[64px]">
                     
-                    <!-- Sitemap Content Area (Revealed on open) -->
-                    <div id="morph-content" class="absolute bottom-[64px] left-0 right-0 top-0 opacity-0 translate-y-4 transition-all duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] pointer-events-none flex flex-col">
-                        
-                        <!-- Sitemap Header -->
-                        <div class="px-6 py-4 border-b border-white/10 flex justify-between items-center shrink-0">
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-yellow-400 text-2xl">explore</span>
-                                <span class="text-white font-bold tracking-wide">Quick Access Sitemap</span>
-                            </div>
-                            <button onclick="closeMorph()" class="text-white/80 hover:text-white transition-colors cursor-pointer pointer-events-auto">
-                                <span class="material-symbols-outlined">close</span>
-                            </button>
-                        </div>
+                    <!-- The Input Area (Fixed at top) -->
+                    <div class="absolute top-0 left-0 right-0 h-[64px] flex items-center p-2 pl-6 border-b border-transparent transition-colors duration-500 z-10" id="morph-input-area">
+                        <span class="material-symbols-outlined text-white/80 absolute left-6">search</span>
+                        <input type="text" id="morph-input" autocomplete="off" placeholder="Search quick links or explore Sitemap..." aria-label="Search quick links or explore Sitemap..." class="bg-transparent text-white placeholder-white/70 outline-none border-none ring-0 focus:ring-0 w-full text-sm lg:text-base font-medium pl-10 pr-12" onfocus="openMorph()">
+                        <button onclick="closeMorph()" id="morph-close-btn" class="absolute right-6 text-white/80 hover:text-white transition-colors cursor-pointer pointer-events-none opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
 
+                    <!-- Sitemap Content Area (Revealed on open, below input) -->
+                    <div id="morph-content" class="absolute top-[64px] bottom-0 left-0 right-0 opacity-0 -translate-y-4 transition-all duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] pointer-events-none flex flex-col">
+                        
                         <!-- Sitemap Grid -->
-                        <div class="flex-grow px-8 py-6 overflow-y-auto">
+                        <div class="flex-grow px-4 md:px-8 py-6 overflow-y-auto custom-scrollbar">
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" id="sitemap-grid">
                                 <!-- Column 1 -->
                                 <div class="flex flex-col gap-3">
                                     <h2 class="text-white/60 text-xs font-bold uppercase tracking-wider mb-2">Patients & Visitors</h2>
-                                    <a href="appointment.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:-translate-y-0.5"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">calendar_month</span> <span class="group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_8px_rgba(250,204,21,0.4)] transition-all duration-300">Book Appointment</span></a>
-                                    <a href="doctors.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:-translate-y-0.5"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">stethoscope</span> <span class="group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_8px_rgba(250,204,21,0.4)] transition-all duration-300">Our Doctors</span></a>
-                                    <a href="departments.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:-translate-y-0.5"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">medical_services</span> <span class="group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_8px_rgba(250,204,21,0.4)] transition-all duration-300">Departments</span></a>
+                                    <a href="appointment.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:translate-x-1"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">calendar_month</span> <span class="group-hover:text-yellow-400 transition-all duration-300">Book Appointment</span></a>
+                                    <a href="doctors.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:translate-x-1"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">stethoscope</span> <span class="group-hover:text-yellow-400 transition-all duration-300">Our Doctors</span></a>
+                                    <a href="departments.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:translate-x-1"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">medical_services</span> <span class="group-hover:text-yellow-400 transition-all duration-300">Departments</span></a>
                                 </div>
                                 <!-- Column 2 -->
                                 <div class="flex flex-col gap-3">
                                     <h2 class="text-white/60 text-xs font-bold uppercase tracking-wider mb-2">About Apex Care</h2>
-                                    <a href="about.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:-translate-y-0.5"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">info</span> <span class="group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_8px_rgba(250,204,21,0.4)] transition-all duration-300">About Us</span></a>
-                                    <a href="gallery.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:-translate-y-0.5"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">photo_library</span> <span class="group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_8px_rgba(250,204,21,0.4)] transition-all duration-300">Facility Gallery</span></a>
-                                    <a href="contact.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:-translate-y-0.5"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">location_on</span> <span class="group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_8px_rgba(250,204,21,0.4)] transition-all duration-300">Locations & Directions</span></a>
+                                    <a href="about.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:translate-x-1"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">info</span> <span class="group-hover:text-yellow-400 transition-all duration-300">About Us</span></a>
+                                    <a href="gallery.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:translate-x-1"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">photo_library</span> <span class="group-hover:text-yellow-400 transition-all duration-300">Facility Gallery</span></a>
+                                    <a href="contact.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:translate-x-1"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">location_on</span> <span class="group-hover:text-yellow-400 transition-all duration-300">Locations & Directions</span></a>
                                 </div>
                                 <!-- Column 3 -->
                                 <div class="flex flex-col gap-3">
                                     <h2 class="text-white/60 text-xs font-bold uppercase tracking-wider mb-2">Support & Help</h2>
-                                    <a href="contact.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:-translate-y-0.5"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">call</span> <span class="group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_8px_rgba(250,204,21,0.4)] transition-all duration-300">Contact Us</span></a>
-                                    <a href="#" onclick="openSOSModal(event)" class="sitemap-link group text-[#E87121] transition-all duration-300 text-sm font-bold flex items-center gap-3 hover:-translate-y-0.5"><span class="material-symbols-outlined text-[18px] group-hover:text-[#ff8938] group-hover:scale-110 transition-all duration-300">emergency</span> <span class="group-hover:text-[#ff8938] group-hover:drop-shadow-[0_0_8px_rgba(255,137,56,0.5)] transition-all duration-300">Emergency 24/7</span></a>
-                                    <a href="#faq" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:-translate-y-0.5"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">live_help</span> <span class="group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_8px_rgba(250,204,21,0.4)] transition-all duration-300">FAQs</span></a>
+                                    <a href="contact.html" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:translate-x-1"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">call</span> <span class="group-hover:text-yellow-400 transition-all duration-300">Contact Us</span></a>
+                                    <a href="#" onclick="openSOSModal(event)" class="sitemap-link group text-[#E87121] transition-all duration-300 text-sm font-bold flex items-center gap-3 hover:translate-x-1"><span class="material-symbols-outlined text-[18px] group-hover:text-[#ff8938] group-hover:scale-110 transition-all duration-300">emergency</span> <span class="group-hover:text-[#ff8938] transition-all duration-300">Emergency 24/7</span></a>
+                                    <a href="#faq" class="sitemap-link group text-white transition-all duration-300 text-sm font-medium flex items-center gap-3 hover:translate-x-1"><span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 group-hover:text-yellow-400 group-hover:scale-110 transition-all duration-300">live_help</span> <span class="group-hover:text-yellow-400 transition-all duration-300">FAQs</span></a>
                                 </div>
                             </div>
                             
@@ -424,16 +428,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- The Input Area (Fixed at bottom) -->
-                    <div class="absolute bottom-0 left-0 right-0 h-[64px] flex items-center p-2 pl-6 border-t border-transparent transition-colors duration-500" id="morph-input-area">
-                        <span class="material-symbols-outlined text-white/80 mr-2 absolute left-6">search</span>
-                        <input type="text" id="morph-input" autocomplete="off" placeholder="Search quick links or explore Sitemap..." aria-label="Search quick links or explore Sitemap..." class="bg-transparent text-white placeholder-white/70 outline-none border-none ring-0 focus:ring-0 w-full text-sm lg:text-base font-medium pl-8" onfocus="openMorph()">
-                    </div>
                 </div>
             </div>
-            </div>
-
             <!-- 4 Action Cards -->
             <style>
                 .sweep-fill-card {
@@ -1207,6 +1203,171 @@
         
         setTimeout(() => {
             sosModal.classList.remove('opacity-0');
+            sosModal.classList.add('opacity-100');
+        }, 10);
+    }
+
+    function closeSOSModal() {
+        sosModal.classList.remove('opacity-100');
+        sosModal.classList.add('opacity-0');
+        document.body.style.overflow = '';
+        
+        setTimeout(() => {
+            sosModal.classList.add('hidden');
+            sosModal.classList.remove('flex');
+        }, 300);
+    }
+
+    function shareLocation() {
+        const status = document.getElementById('location-status');
+        const icon = document.getElementById('location-icon');
+        
+        if (!navigator.geolocation) {
+            status.textContent = 'Geolocation is not supported by your browser';
+            return;
+        }
+
+        status.textContent = 'Locating...';
+        icon.textContent = 'hourglass_empty';
+        
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                const mapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+                const message = `EMERGENCY: I need help. My current location is: ${mapsUrl}`;
+                
+                status.textContent = 'Location Found! Opening WhatsApp...';
+                icon.textContent = 'check_circle';
+                
+                setTimeout(() => {
+                    window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+                    status.textContent = 'Send GPS coordinates via WhatsApp';
+                    icon.textContent = 'share_location';
+                }, 1000);
+            },
+            (error) => {
+                status.textContent = 'Unable to retrieve location (Permission Denied).';
+                icon.textContent = 'error';
+            }
+        );
+    }
+</script>
+
+<!-- UI Enhancements Logic (Scroll Animations, Navbar, Count-up) -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1 & 4. Sticky Navbar & Scroll Animations
+        const topNav = document.getElementById('top-nav');
+        const revealElements = document.querySelectorAll('.blur-reveal');
+        
+        window.addEventListener('scroll', () => {
+            // Navbar Solid State
+            if (window.scrollY > 50) {
+                topNav.classList.add('nav-solid');
+                topNav.classList.remove('bg-transparent', 'text-white', 'pt-4', 'pb-2');
+            } else {
+                topNav.classList.remove('nav-solid');
+                topNav.classList.add('bg-transparent', 'text-white', 'pt-4', 'pb-2');
+            }
+        });
+
+        // Intersection Observer for Blur-Reveals
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 3. Count-up Animation
+        const countUpElements = document.querySelectorAll('.count-up, .count-up-float');
+        const countObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseFloat(entry.target.getAttribute('data-target'));
+                    const isFloat = entry.target.classList.contains('count-up-float');
+                    const duration = 2000;
+                    const frameDuration = 1000 / 60;
+                    const totalFrames = Math.round(duration / frameDuration);
+                    let frame = 0;
+                    
+                    const counter = setInterval(() => {
+                        frame++;
+                        const progress = frame / totalFrames;
+                        // easeOutQuad
+                        const currentCount = target * (progress * (2 - progress));
+                        
+                        if (isFloat) {
+                            entry.target.innerText = currentCount.toFixed(1);
+                        } else {
+                            entry.target.innerText = Math.floor(currentCount);
+                        }
+                        
+                        if (frame >= totalFrames) {
+                            entry.target.innerText = isFloat ? target.toFixed(1) : target;
+                            clearInterval(counter);
+                        }
+                    }, frameDuration);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        countUpElements.forEach(el => countObserver.observe(el));
+    });
+</script>
+
+<!-- Morph AI Logic -->
+<script>
+    const morphContainer = document.getElementById('morph-container');
+    const morphContent = document.getElementById('morph-content');
+    const morphInputArea = document.getElementById('morph-input-area');
+    const morphInput = document.getElementById('morph-input');
+    let isMorphOpen = false;
+
+    function openMorph() {
+        if (isMorphOpen) return;
+        isMorphOpen = true;
+
+        // Smooth Container Expansion with Glowing Shadow
+        morphContainer.classList.add('shadow-[0_20px_50px_rgba(0,255,180,0.15)]');
+        morphContainer.classList.remove('shadow-[0_8px_32px_rgba(0,0,0,0.4)]', 'h-[64px]', 'rounded-full', 'bg-[#053229]/50');
+        morphContainer.classList.add('h-auto', 'min-h-[300px]', 'max-h-[60vh]', 'rounded-3xl', 'bg-[#053229]/95');
+        
+        // Smooth Content Reveal
+        morphContent.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+        morphContent.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        morphInputArea.classList.replace('border-transparent', 'border-white/10');
+        
+        // Show close button
+        document.getElementById('morph-close-btn').classList.remove('opacity-0', 'pointer-events-none');
+        document.getElementById('morph-close-btn').classList.add('opacity-100', 'pointer-events-auto');
+    }
+
+    function closeMorph() {
+        if (!isMorphOpen) return;
+        isMorphOpen = false;
+
+        // Smooth Content Hide
+        morphContent.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        morphContent.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+        
+        // Smooth Container Collapse and remove glow
+        morphContainer.classList.remove('shadow-[0_20px_50px_rgba(0,255,180,0.15)]', 'h-auto', 'min-h-[300px]', 'max-h-[60vh]', 'rounded-3xl', 'bg-[#053229]/95');
+        morphContainer.classList.add('shadow-[0_8px_32px_rgba(0,0,0,0.4)]', 'h-[64px]', 'rounded-full', 'bg-[#053229]/50');
+        morphInputArea.classList.replace('border-white/10', 'border-transparent');
+        
+        // Hide close button
+        document.getElementById('morph-close-btn').classList.remove('opacity-100', 'pointer-events-auto');
+        document.getElementById('morph-close-btn').classList.add('opacity-0', 'pointer-events-none');
+        
+        // Reset search state after transition
+        setTimeout(() => {            sosModal.classList.remove('opacity-0');
             sosModal.classList.add('opacity-100');
         }, 10);
     }
