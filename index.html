@@ -347,7 +347,7 @@
 
 <main class="flex-grow z-10 relative">
     <!-- Hero Section -->
-    <section class="relative w-full min-h-[70vh] md:min-h-[100vh] overflow-hidden shadow-2xl flex flex-col justify-end bg-[#0F5B4D]">
+    <section class="relative w-full h-[100svh] overflow-hidden shadow-2xl flex flex-col justify-end bg-[#0F5B4D]">
                 <!-- Background Slideshow -->
         <div class="absolute inset-0 z-0 bg-[#0F5B4D]">
             <div class="slideshow" id="hero-slider">
@@ -364,10 +364,7 @@
                     <span class="material-symbols-outlined text-2xl md:text-3xl">chevron_right</span>
                 </button>
             </div>
-            <!-- Overlay to darken the images slightly for text legibility -->
-            <div class="absolute inset-0 bg-[#0F5B4D]/30 z-10 pointer-events-none mix-blend-multiply"></div>
-            <!-- Bottom Gradient for Text Legibility -->
-            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0F5B4D]/90 via-[#0F5B4D]/40 to-transparent z-10 pointer-events-none"></div>
+            
         </div>
 
         <!-- Hero Content Overlay -->
@@ -500,10 +497,8 @@
             <div class="bg-white rounded-2xl md:rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col lg:flex-row relative z-10 mb-12">
                 
                 <!-- Left Side: Flush Image -->
-                <div class="w-full lg:w-1/2 relative lg:rounded-l-3xl rounded-t-3xl lg:rounded-tr-none overflow-hidden min-h-[400px]">
-                    <img src="about-us-image.png" alt="Apex Care Hospital" class="absolute inset-0 w-full h-full object-cover object-center" />
-                    <!-- Spacer for mobile intrinsic height -->
-                    <div class="pt-[80%] lg:pt-0"></div>
+                <div class="w-full lg:w-1/2 relative lg:rounded-l-3xl rounded-t-3xl lg:rounded-tr-none overflow-hidden lg:min-h-[400px]">
+                    <img src="about-us-image.png" alt="Apex Care Hospital" class="w-full h-auto block lg:absolute lg:inset-0 lg:h-full lg:object-cover lg:object-center" />
                 </div>
 
                 <!-- Right Side: Text Content -->
